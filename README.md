@@ -99,7 +99,8 @@ Basic DRF Workflow
 Why Use DRF?<br>
 DRF simplifies the process of creating robust APIs with Django by providing built-in features and a consistent structure for serialization, views, authentication, and more. This makes DRF a powerful tool for building production-ready APIs quickly and efficiently in Python
 
-## Serializers in DRF
+## Serializers in DRF 
+Implementation in Project1
 ### Python Json (Not used commonly)
 In Python, JSON (JavaScript Object Notation) is a popular data format used to store and exchange data between a server and a client. Python has a built-in library, called json, to work with JSON data, allowing you to easily convert Python data structures to JSON and vice versa.
 
@@ -114,7 +115,7 @@ To parse JSON and convert it into Python objects, use json.loads() or json.load(
 * json.load(): Reads JSON data from a file and converts it to a Python object.
 
 ### Serializer
-In DRF, serializer are responsible for converting complex data such as querysets and model instance to native python datatype (called serialization) that can then be easily rendered into JSON or other content type which is understandable by frontend 
+In DRF, serializer are responsible for converting complex data such as querysets and model instance to native python datatype (called serialization) that can then be easily rendered into JSON or other content type which is understandable by frontend.
 
 Steps to create a serializer: (for code reference open Project1, API app)
 1. Define your Model
@@ -145,5 +146,66 @@ It is an HttpResponse subclass that helps to create a Json-encoded response. It 
 * The safe boolean parameter defaults to True. If it’s set to False, any object can be passed for serialization (otherwise only dict instances are allowed). If safe is True and a non-dict object is passed as the first argument, a TypeError will be raised.
 * The json_dumps_params parameter is a dictionary of keyword arguments to pass to the json.dumps() call used to generate the response.
 
-#### How is data Serialized
+How is data Serialized
 ![Serializing Data](./Images/SerializingData.png)
+
+## De-serialization in DRF
+Implementation in Project2
+### De-serialization
+Deserialization is the reverse of serialization. It involves taking serialized data (like a JSON string) and reconstructing it back into a Python object, C# object, or any native language object.
+
+Why is Deserialization Needed?
+* Data Reconstruction: Rebuild objects from data received over a network.
+* Read Files: Load configuration files, logs, or cache files back into a usable format.
+* API Consumption: Convert JSON responses from APIs back into native objects for further processing.
+
+![de-serializing](./Images/De-serialization.png)
+
+### BytesIO
+BytesIO is a memory buffer that acts like a file for binary data. It is part of Python's io module and is commonly used to work with binary data without actually creating a physical file on disk. It allows you to read from and write to binary streams as if they were files.
+
+Why Use BytesIO?
+* Avoid creating temporary files on disk when working with binary data (like images, PDFs, etc.).
+* Perform read/write operations in memory (faster than disk operations).
+* Useful for streaming binary data over networks.
+
+### JSONParser
+JSONParser is a tool or utility for parsing (converting) JSON data into a usable, structured format (like a dictionary, list, or object in a programming language). It takes a JSON string and parses it into a format that can be manipulated programmatically.
+
+Why Use JSONParser?
+* To read and process JSON responses from APIs.
+* To convert JSON configuration files into dictionaries or objects.
+* To extract specific data points from large JSON payloads.
+
+### JSONRenderer
+JSONRenderer is a tool for converting Python objects into JSON format. It is the reverse of JSONParser. It takes objects (like dictionaries or lists) and converts them to JSON format, often as part of a web API response.
+
+Why Use JSONRenderer?
+* To send JSON responses to API clients.
+* To convert Python objects to JSON for logging, debugging, or saving.
+* To serialize data in a format that can be transmitted over the network (like in REST APIs).
+
+### When to Use Each One?
+* Use BytesIO when you need to handle binary data in memory (like images, PDFs, or files) without creating a file on disk.
+* Use JSONParser when you receive JSON data from an API, file, or request body, and you want to convert it into a Python object (like a dictionary or list).
+* Use JSONRenderer when you want to convert Python objects into JSON to send it as a response in a web API or for serialization before saving to a file.
+
+Let’s combine BytesIO, JSONParser, and JSONRenderer into one example.
+
+Scenario:
+* You receive a binary request body (like from an API) that contains JSON data.
+* You parse the binary data using BytesIO and convert it into a Python object using JSONParser.
+* You make changes to the Python object and render it back as JSON using JSONRenderer.
+
+Steps to create a de-serializer:
+1. Create a Django Model - Before you can deserialize data, you need a model to define the structure of the data you want to store. 
+2.  Create a Serializer- A serializer in Django REST Framework (DRF) defines how incoming raw data (like JSON) is converted into a Python object and validated.
+3. Write a View to Deserialize Data - A view is where we handle the incoming data, parse it, validate it, and save it to the database. We'll use Django REST Framework parsers like JSONParser to convert incoming JSON to Python objects.
+  Deserialization Steps:
+  * Read request body: request.body reads the binary data from the request.
+  * Create a stream: The binary data is converted to an in-memory stream using io.BytesIO().
+  * Parse the stream: JSONParser().parse(stream) parses the binary JSON data to a Python dictionary.
+  * Send data to serializer: StudentSerializer(data=python_data) sends the data to the serializer.
+  * Validate the data: serializer.is_valid() checks if the incoming data matches the serializer constraints.
+  * Save Data: If the data is valid, serializer.save() calls the create() method in the StudentSerializer to save the Student object in the database.
+  * Error Handling: If the data is invalid, it returns the validation errors.

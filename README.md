@@ -200,7 +200,7 @@ Scenario:
 Steps to create a de-serializer:
 1. Create a Django Model - Before you can deserialize data, you need a model to define the structure of the data you want to store. 
 2.  Create a Serializer- A serializer in Django REST Framework (DRF) defines how incoming raw data (like JSON) is converted into a Python object and validated.
-3. Write a View to Deserialize Data - A view is where we handle the incoming data, parse it, validate it, and save it to the database. We'll use Django REST Framework parsers like JSONParser to convert incoming JSON to Python objects.
+3. Write a View to Deserialize Data - A view is where we handle the incoming data, parse it, validate it, and save it to the database. We'll use Django REST Framework parsers like JSONParser to convert incoming JSON to Python objects.<br>
   Deserialization Steps:
   * Read request body: request.body reads the binary data from the request.
   * Create a stream: The binary data is converted to an in-memory stream using io.BytesIO().
@@ -209,3 +209,63 @@ Steps to create a de-serializer:
   * Validate the data: serializer.is_valid() checks if the incoming data matches the serializer constraints.
   * Save Data: If the data is valid, serializer.save() calls the create() method in the StudentSerializer to save the Student object in the database.
   * Error Handling: If the data is invalid, it returns the validation errors.
+
+## CURD Operation in drf
+Implementation in 
+### CURD operation
+CRUD stands for Create, Read, Update, and Delete, which are the four basic operations you can perform on a database or resource in an application. In web development, CRUD operations are typically linked with HTTP methods as follows:
+| **Operation** | **HTTP Method** | **Endpoint**       | **Action**                                |
+|---------------|-----------------|-------------------|-------------------------------------------|
+| **Create**    | **POST**         | `/books/`         | Add a new book to the database. The request body contains the book details like title, author, etc. |
+| **Read (All)**| **GET**          | `/books/`         | Retrieve a list of all books from the database. |
+| **Read (One)**| **GET**          | `/books/<id>/`    | Retrieve details of a specific book using its unique **id**. |
+| **Update**    | **PUT / PATCH**  | `/books/<id>/`    | Update an existing book's information using its **id**. The request body contains the fields to be updated. |
+| **Delete**    | **DELETE**       | `/books/<id>/`    | Delete a specific book from the database using its **id**. |
+
+### FVB and CBV
+A Function-Based View (FBV) is a simple, straightforward way to write views in Django. Each view is a Python function that takes an HTTP request and returns an HTTP response.
+Key Characteristics of FBVs
+* Simpler and more readable for small, straightforward logic.
+* Each view corresponds to an individual function.
+* @api_view() decorator is used in Django REST Framework (DRF) to specify which HTTP methods are allowed.
+* Less reusability, as you have to repeat similar logic for other views.
+How an FBV Works
+* Input: It takes a request (request object) and optional URL parameters.
+* Process: Executes the logic for handling GET, POST, PUT, DELETE requests.
+* Output: Returns an HTTP response or JSON response.
+
+A Class-Based View (CBV) is a view written as a Python class instead of a function. It defines methods for handling different HTTP requests, like get(), post(), put(), delete().
+Key Characteristics of CBVs
+* Better for reusability and inheritance.
+* DRY (Don’t Repeat Yourself): No need to repeat the same logic for each view.
+* Uses Django’s built-in classes like ListView, DetailView, CreateView, etc.
+* Can be easily extended using inheritance.
+* More complex to understand for beginners but offers cleaner and more organized code.
+How a CBV Works
+* Input: HTTP request sent to a view class.
+* Process: Calls the corresponding class method (get, post, put, etc.).
+* Output: Returns an HTTP response or JSON response.
+
+#### **Key Differences: Function-Based Views (FBV) vs Class-Based Views (CBV)**
+
+| **Criteria**         | **Function-Based Views (FBV)**  | **Class-Based Views (CBV)**    |
+|---------------------|---------------------------------|---------------------------------|
+| **Code Length**       | Longer, repetitive             | Shorter, reusable methods       |
+| **Readability**       | Simple, beginner-friendly      | More abstract, harder for newbies |
+| **Customization**     | Simple to customize            | Customization requires inheritance |
+| **Reusability**       | Hard to reuse                  | More reusable, thanks to classes |
+| **Code Organization** | All logic in one function      | Logic divided into methods      |
+| **Best For**          | Small projects                 | Large, scalable applications    |
+| **HTTP Methods**      | Manually handle GET, POST, etc.| Handles GET, POST, etc. with methods |
+| **Repetition**        | Repeats similar logic in views | DRY, reuse existing classes     |
+
+#### **When to Use: Function-Based Views (FBV) vs Class-Based Views (CBV)**
+
+| **When to Use FBV?**         | **When to Use CBV?**           |
+|-----------------------------|---------------------------------|
+| **Small apps or prototypes**  | **Large, scalable applications** |
+| **Simple logic**               | **Complex logic, inheritance required** |
+| **For learning purposes**      | **When you want DRY and clean code** |
+| **If you want full control**   | **When you want reusability**  |
+
+> **Note**: Use **FBV** for simple, small applications or if you’re a beginner. Use **CBV** for larger, scalable applications where reusability and DRY principles are important.

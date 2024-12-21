@@ -211,7 +211,7 @@ Steps to create a de-serializer:
   * Error Handling: If the data is invalid, it returns the validation errors.
 
 ## CURD Operation in drf
-Implementation in 
+Implementation in Project3
 ### CURD operation
 CRUD stands for Create, Read, Update, and Delete, which are the four basic operations you can perform on a database or resource in an application. In web development, CRUD operations are typically linked with HTTP methods as follows:
 | **Operation** | **HTTP Method** | **Endpoint**       | **Action**                                |
@@ -269,3 +269,29 @@ How a CBV Works
 | **If you want full control**   | **When you want reusability**  |
 
 > **Note**: Use **FBV** for simple, small applications or if you’re a beginner. Use **CBV** for larger, scalable applications where reusability and DRY principles are important.
+
+## Validation in DRF
+Validation is crucial for ensuring that the data coming into your API is clean, structured, and meets certain criteria.
+Here's an explanation of field-level validation, object-level validation, and validators in DRF:
+1. Field-Level Validation
+  Field-level validation is performed on individual fields of a serializer. You define custom validation logic for a specific field by adding a method named validate_<field_name> to your serializer class.<br>
+  Use Case:
+  * When you need to validate one specific field independently of others.
+
+2. Object-Level Validation
+  Object-level validation validates the entire object, allowing you to check interdependencies between multiple fields. You implement this by overriding the validate method in the serializer class.<br>
+  Use Case:
+  * When validation depends on the relationship between multiple fields.
+
+3. Validators
+  Validators are reusable, standalone validation functions or classes that can be applied to serializer fields. They allow you to define validation logic separately and use it across multiple serializers.<br>
+  Types of Validators:
+  * Function-Based Validators: Simple functions applied to fields.
+  * Class-Based Validators: Classes that implement the __call__ method for complex validation logic.
+
+Comparison:
+| Feature         | Field-Level Validation              | Object-Level Validation        | Validators                      |
+|------------------|-------------------------------------|---------------------------------|---------------------------------|
+| **Scope**       | Individual fields                  | Entire object                  | Specific fields                |
+| **Dependency**  | Independent of other fields        | Validates interdependencies    | Reusable across serializers    |
+| **Usage**       | `validate_<field_name>` method     | `validate` method              | Functions or classes applied to fields |

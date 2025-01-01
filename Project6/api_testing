@@ -1,0 +1,79 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "Project6",
+    "collectionId": "f88afdd6-bc27-4785-b08b-720e8d539719",
+    "dateExported": "2024-12-24T15:53:32.214Z",
+    "version": "1.2",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "648c5a63-a03c-4145-8735-51e40af04c88",
+            "colId": "f88afdd6-bc27-4785-b08b-720e8d539719",
+            "containerId": "",
+            "name": "Project6GET",
+            "url": "http://localhost:8000/student_api",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2024-12-23T06:41:28.471Z",
+            "modified": "2024-12-23T06:41:28.471Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\"id\":2}",
+                "form": []
+            }
+        },
+        {
+            "_id": "83eaa537-9ebc-4a23-9ce3-4af2b122bc46",
+            "colId": "f88afdd6-bc27-4785-b08b-720e8d539719",
+            "containerId": "",
+            "name": "Project6POST",
+            "url": "http://localhost:8000/student_api/",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-12-23T06:49:46.053Z",
+            "modified": "2024-12-23T06:49:46.053Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\":\"Manan\",\n  \"city\":\"Dombivali\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "79629ede-31a3-45e6-82ad-1eefca9f959e",
+            "colId": "f88afdd6-bc27-4785-b08b-720e8d539719",
+            "containerId": "",
+            "name": "Project6PUT",
+            "url": "http://localhost:8000/student_api/",
+            "method": "PUT",
+            "sortNum": 30000,
+            "created": "2024-12-23T07:01:46.339Z",
+            "modified": "2024-12-23T07:01:46.339Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"id\":4,\n  \"name\":\"Rahul\",\n  \"city\":\"Dombivali\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "d44125e3-78de-4759-989e-473caf15c20f",
+            "colId": "f88afdd6-bc27-4785-b08b-720e8d539719",
+            "containerId": "",
+            "name": "Project6DELETE",
+            "url": "http://localhost:8000/student_api/",
+            "method": "DELETE",
+            "sortNum": 40000,
+            "created": "2024-12-23T07:04:29.000Z",
+            "modified": "2024-12-23T07:04:29.000Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"id\":4\n}",
+                "form": []
+            }
+        }
+    ],
+    "ref": "24WsWoxXO0gpoZYGMtmQzjQTGFQRH6RtzQeci9FOqs-RtUuLja4zVfnQdh9PWtWK4gy4UhEO08cztk0SZ1w4lQ"
+}

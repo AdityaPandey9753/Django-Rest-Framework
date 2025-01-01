@@ -100,7 +100,7 @@ Why Use DRF?<br>
 DRF simplifies the process of creating robust APIs with Django by providing built-in features and a consistent structure for serialization, views, authentication, and more. This makes DRF a powerful tool for building production-ready APIs quickly and efficiently in Python
 
 ## Serialization
-Implementation in Project1
+Implementation in Project1.
 ### Python Json (Not used commonly)
 In Python, JSON (JavaScript Object Notation) is a popular data format used to store and exchange data between a server and a client. Python has a built-in library, called json, to work with JSON data, allowing you to easily convert Python data structures to JSON and vice versa.
 
@@ -150,7 +150,7 @@ How is data Serialized
 ![Serializing Data](./Images/SerializingData.png)
 
 ## De-serialization
-Implementation in Project2
+Implementation in Project2.
 ### De-serialization
 Deserialization is the reverse of serialization. It involves taking serialized data (like a JSON string) and reconstructing it back into a Python object, C# object, or any native language object.
 
@@ -211,7 +211,7 @@ Steps to create a de-serializer:
   * Error Handling: If the data is invalid, it returns the validation errors.
 
 ## CURD and Views
-Implementation in Project3
+Implementation in Project3.
 ### CURD operation
 CRUD stands for Create, Read, Update, and Delete, which are the four basic operations you can perform on a database or resource in an application. In web development, CRUD operations are typically linked with HTTP methods as follows:
 | **Operation** | **HTTP Method** | **Endpoint**       | **Action**                                |
@@ -271,7 +271,7 @@ How a CBV Works
 > **Note**: Use **FBV** for simple, small applications or if you’re a beginner. Use **CBV** for larger, scalable applications where reusability and DRY principles are important.
 
 ## Validation
-Implementation in Project4<br>
+Implementation in Project4.<br>
 Validation is crucial for ensuring that the data coming into your API is clean, structured, and meets certain criteria.
 Here's an explanation of field-level validation, object-level validation, and validators in DRF:
 1. Field-Level Validation
@@ -298,27 +298,27 @@ Comparison:
 | **Usage**       | `validate_<field_name>` method     | `validate` method              | Functions or classes applied to fields |
 
 ## ModelSerializer
-implementation in Project5<br>
+implementation in Project5.<br>
 ModelSerializer is a subclass of Serializer in Django REST Framework (DRF) designed to simplify the process of creating serializers for Django models. It provides shortcuts for creating serializers that automatically handle many common tasks, such as field creation, validation, and instance saving.<br>
 Key Features of ModelSerializer:
-1. Automatic Field Creation:
+* Automatic Field Creation:
   * ModelSerializer automatically creates serializer fields based on the fields of the associated Django model.
   * You can specify which fields to include, exclude, or make read-only using the Meta class.
-2. Default Validators:
+* Default Validators:
   * It uses the model field’s constraints (like unique, max_length, etc.) and validation rules automatically.
   * Example: If a field is marked as unique in the model, the serializer enforces this constraint during validation.
-3. Simplified Save Method:
+* Simplified Save Method:
   * The save() method automatically creates or updates a model instance, so you don’t need to explicitly handle instance creation or updates unless customization is required.
-4. Custom Validation:
+* Custom Validation:
   * Supports field-level (validate_<field_name>) and object-level (validate) validation.
-5. Relationships Handling:
+* Relationships Handling:
   * Automatically supports ForeignKey, ManyToManyField, and other relationships.
   * You can customize how related fields are serialized using options like depth or custom serializers.
-6. Overriding Field Behavior:
+* Overriding Field Behavior:
   * Allows overriding default behavior for individual fields by explicitly defining them.
-7. Custom Save Logic:
+* Custom Save Logic:
   * If you need custom save logic, you can override the create and update methods.
-8. Efficient Query Usage:
+* Efficient Query Usage:
   * When used with ModelViewSet or other DRF components, ModelSerializer helps ensure efficient database querying.
 
 ### key difference between Serializer and ModelSerializer
@@ -340,3 +340,34 @@ When to Use:
 * Use Serializer:
   * For data structures not tied to Django models (e.g., external APIs or complex nested data).
   * When you need full control over the serialization and validation process.
+
+## Views
+In Django REST Framework (DRF), a View is the central component for handling incoming HTTP requests, processing them, and returning appropriate HTTP responses. Views are responsible for the logic of your API, including retrieving data, updating resources, and handling various request methods (e.g., GET, POST, PUT, DELETE).
+### Function Based API views
+Implementation in Project6.<br>
+A function-based API view is a simple Python function that directly handles API logic for specific HTTP methods. DRF provides the @api_view decorator to define which HTTP methods a function should handle.<br>
+Features:
+* Minimal abstraction.
+* Explicitly handles HTTP methods.
+* Easier for small-scale or simple applications.
+Advantages:
+* Easy to set up and understand.
+* Ideal for small projects or endpoints with simple logic.
+Disadvantages:
+* Code becomes repetitive and harder to maintain as complexity increases.
+* Doesn't promote code reuse.
+
+### Class Based API views
+Implementation in Project7.<br>
+A class-based API view uses the APIView class to define API logic. Instead of a single function handling multiple HTTP methods, each method (e.g., get, post, put, etc.) is defined as a class method.<br>
+Features:
+* Object-oriented approach.
+* Better code organization and reusability.
+* Supports middleware, mixins, and inheritance for extensibility.
+Advantages:
+* Promotes reusable and modular code.
+* Easier to extend and maintain for complex applications.
+* Compatible with mixins, permissions, and other DRF features.
+Disadvantages:
+* Slightly more boilerplate compared to function-based views.
+* Higher learning curve for beginners.
